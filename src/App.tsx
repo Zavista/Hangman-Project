@@ -17,6 +17,7 @@ const containerStyle: React.CSSProperties = {
 const textStyle: React.CSSProperties = {
   fontSize: "2rem",
   textAlign: "center",
+  height: "25px",
 };
 
 const App = () => {
@@ -33,12 +34,17 @@ const App = () => {
     (letter) => !wordToGuess.includes(letter)
   );
 
+  const isLoser: boolean = incorrectLetters.length >= 6;
+  const isWinner: boolean = wordToGuess
+    .split("")
+    .every((letter: string) => guessedLetters.includes(letter));
+
   const addGuessedLetters = useCallback(
     (key: string): void => {
-      if (guessedLetters.includes(key)) return;
+      if (guessedLetters.includes(key) || isLoser || isWinner) return;
       setGuessedLetters((guessedLetters) => [...guessedLetters, key]);
     },
-    [guessedLetters]
+    [guessedLetters, isWinner, isLoser]
   );
 
   useEffect(() => {
@@ -59,11 +65,6 @@ const App = () => {
     };
   }, []);
 
-  const isLoser: boolean = incorrectLetters.length >= 6;
-  const isWinner: boolean = wordToGuess
-    .split("")
-    .every((letter: string) => guessedLetters.includes(letter));
-
   return (
     <div style={containerStyle}>
       <div style={textStyle}>
@@ -76,6 +77,7 @@ const App = () => {
       <HangmanWord
         wordToGuess={wordToGuess}
         guessedLetters={guessedLetters}
+        reveal={isLoser}
       ></HangmanWord>
       <div style={{ alignSelf: "stretch" }}>
         <Keyboard
@@ -84,6 +86,7 @@ const App = () => {
             wordToGuess.includes(letter)
           )}
           inactiveLetters={incorrectLetters}
+          disabled={isLoser || isWinner}
         ></Keyboard>
       </div>
     </div>
