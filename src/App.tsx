@@ -70,7 +70,13 @@ const App = () => {
         guessedLetters={guessedLetters}
       ></HangmanWord>
       <div style={{ alignSelf: "stretch" }}>
-        <Keyboard addGuessedLetters={addGuessedLetters}></Keyboard>
+        <Keyboard
+          addGuessedLetters={addGuessedLetters}
+          activeLetters={guessedLetters.filter((letter) =>
+            wordToGuess.includes(letter)
+          )}
+          inactiveLetters={incorrectLetters}
+        ></Keyboard>
       </div>
     </div>
   );
