@@ -25,6 +25,10 @@ const App = () => {
   const [wordToGuess, setWordGuess] = useState<string>("");
   const [guessLetters, setGuessedLetters] = useState<string[]>([]);
 
+  const incorrectLetters: string[] = guessLetters.filter(
+    (letter) => !wordToGuess.includes(letter)
+  );
+
   useEffect(() => {
     setWordGuess(words[Math.floor(Math.random() * words.length)]);
   }, []);
@@ -32,7 +36,9 @@ const App = () => {
   return (
     <div style={containerStyle}>
       <div style={textStyle}>{wordToGuess}</div>
-      <HangmanDrawing></HangmanDrawing>
+      <HangmanDrawing
+        numberOfGuesses={incorrectLetters.length}
+      ></HangmanDrawing>
       <HangmanWord></HangmanWord>
       <div style={{ alignSelf: "stretch" }}>
         <Keyboard></Keyboard>
