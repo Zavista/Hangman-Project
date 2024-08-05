@@ -35,7 +35,9 @@ const App = () => {
       <div style={textStyle}>{wordToGuess}</div>
       <HangmanDrawing></HangmanDrawing>
       <HangmanWord></HangmanWord>
-      <Keyboard></Keyboard>
+      <div style={{ alignSelf: "stretch" }}>
+        <Keyboard></Keyboard>
+      </div>
     </div>
   );
 };
