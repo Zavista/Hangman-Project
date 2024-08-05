@@ -38,20 +38,33 @@ const containerStyle: CSSProperties = {
 
 type KeyboardProps = {
   addGuessedLetters: (key: string) => void;
+  activeLetters: string[];
+  inactiveLetters: string[];
 };
 
-const Keyboard = ({ addGuessedLetters }: KeyboardProps) => {
+const Keyboard = ({
+  addGuessedLetters,
+  activeLetters,
+  inactiveLetters,
+}: KeyboardProps) => {
   return (
     <div style={containerStyle}>
-      {KEYS.map((key) => (
-        <button
-          key={key}
-          className={`${styles.btn}`}
-          onClick={() => addGuessedLetters(key)}
-        >
-          {key}
-        </button>
-      ))}
+      {KEYS.map((key) => {
+        const isActive = activeLetters.includes(key);
+        const isInactive = inactiveLetters.includes(key);
+        return (
+          <button
+            onClick={() => addGuessedLetters(key)}
+            className={`${styles.btn} ${isActive ? styles.active : ""} ${
+              isInactive ? styles.inactive : ""
+            }`}
+            disabled={isInactive || isActive}
+            key={key}
+          >
+            {key}
+          </button>
+        );
+      })}
     </div>
   );
 };
