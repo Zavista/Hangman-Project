@@ -36,11 +36,19 @@ const containerStyle: CSSProperties = {
   gap: ".5rem",
 };
 
-const Keyboard = () => {
+type KeyboardProps = {
+  addGuessedLetters: (key: string) => void;
+};
+
+const Keyboard = ({ addGuessedLetters }: KeyboardProps) => {
   return (
     <div style={containerStyle}>
       {KEYS.map((key) => (
-        <button key={key} className={`${styles.btn}`}>
+        <button
+          key={key}
+          className={`${styles.btn}`}
+          onClick={() => addGuessedLetters(key)}
+        >
           {key}
         </button>
       ))}
