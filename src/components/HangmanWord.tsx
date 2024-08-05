@@ -9,14 +9,16 @@ const containerStyle: CSSProperties = {
   fontFamily: "monospace",
 };
 
-const HangmanWord = () => {
-  const word: string = "test";
+type HangmanWordProps = {
+  wordToGuess: string;
+};
 
+const HangmanWord = ({ wordToGuess }: HangmanWordProps) => {
   const guessedLetters: string[] = ["t", "a", "b"];
 
   return (
     <div style={containerStyle}>
-      {word.split("").map((letter, index) => (
+      {wordToGuess.split("").map((letter, index) => (
         <span key={index} style={{ borderBottom: ".1em solid black" }}>
           <span
             style={{
