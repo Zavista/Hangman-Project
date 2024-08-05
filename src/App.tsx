@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import wordsData from "./wordsList.json";
+import HangmanDrawing from "./components/HangmanDrawing";
+import HangmanWord from "./components/HangmanWord";
+import Keyboard from "./components/Keyboard";
 
 const App = () => {
   const words: string[] = wordsData;
@@ -30,6 +33,9 @@ const App = () => {
   return (
     <div style={containerStyle}>
       <div style={textStyle}>{wordToGuess}</div>
+      <HangmanDrawing></HangmanDrawing>
+      <HangmanWord></HangmanWord>
+      <Keyboard></Keyboard>
     </div>
   );
 };
