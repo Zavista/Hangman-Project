@@ -11,11 +11,10 @@ const containerStyle: CSSProperties = {
 
 type HangmanWordProps = {
   wordToGuess: string;
+  guessedLetters: string[];
 };
 
-const HangmanWord = ({ wordToGuess }: HangmanWordProps) => {
-  const guessedLetters: string[] = ["t", "a", "b"];
-
+const HangmanWord = ({ wordToGuess, guessedLetters }: HangmanWordProps) => {
   return (
     <div style={containerStyle}>
       {wordToGuess.split("").map((letter, index) => (

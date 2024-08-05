@@ -23,9 +23,13 @@ const App = () => {
   const words: string[] = wordsData;
 
   const [wordToGuess, setWordGuess] = useState<string>("");
-  const [guessLetters, setGuessedLetters] = useState<string[]>(["g", "t", "o"]);
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([
+    "g",
+    "t",
+    "o",
+  ]);
 
-  const incorrectLetters: string[] = guessLetters.filter(
+  const incorrectLetters: string[] = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
   );
 
@@ -39,7 +43,10 @@ const App = () => {
       <HangmanDrawing
         numberOfGuesses={incorrectLetters.length}
       ></HangmanDrawing>
-      <HangmanWord wordToGuess={wordToGuess}></HangmanWord>
+      <HangmanWord
+        wordToGuess={wordToGuess}
+        guessedLetters={guessedLetters}
+      ></HangmanWord>
       <div style={{ alignSelf: "stretch" }}>
         <Keyboard></Keyboard>
       </div>
