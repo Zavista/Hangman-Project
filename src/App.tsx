@@ -23,20 +23,41 @@ const App = () => {
   const words: string[] = wordsData;
 
   const [wordToGuess, setWordGuess] = useState<string>("");
-  const [guessedLetters, setGuessedLetters] = useState<string[]>([
-    "g",
-    "t",
-    "o",
-  ]);
-
-  const incorrectLetters: string[] = guessedLetters.filter(
-    (letter) => !wordToGuess.includes(letter)
-  );
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
 
   useEffect(() => {
     setWordGuess(words[Math.floor(Math.random() * words.length)]);
   }, []);
 
+  const incorrectLetters: string[] = guessedLetters.filter(
+    (letter) => !wordToGuess.includes(letter)
+  );
+
+  const addGuessedLetters = (key: string): void => {
+    if (guessedLetters.includes(key)) return;
+    setGuessedLetters((guessedLetters) => [...guessedLetters, key]);
+  };
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const key = e.key;
+
+      if (!key.match(/^[a-z]$/)) return;
+
+      e.preventDefault();
+
+      addGuessedLetters(key);
+    };
+
+    document.addEventListener("keypress", handler);
+
+    return () => {
+      document.removeEventListener("keypress", handler);
+    };
+  }, []);
+
+  console.log(guessedLetters);
+  console.log(incorrectLetters);
   return (
     <div style={containerStyle}>
       <div style={textStyle}>{wordToGuess}</div>
