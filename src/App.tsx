@@ -59,9 +59,17 @@ const App = () => {
     };
   }, []);
 
+  const isLoser: boolean = incorrectLetters.length >= 6;
+  const isWinner: boolean = wordToGuess
+    .split("")
+    .every((letter: string) => guessedLetters.includes(letter));
+
   return (
     <div style={containerStyle}>
-      <div style={textStyle}>{wordToGuess}</div>
+      <div style={textStyle}>
+        {isWinner && "Winner! - Refresh to try again"}
+        {isLoser && `Nice Try! Word was ${wordToGuess}  - Refresh to try again`}
+      </div>
       <HangmanDrawing
         numberOfGuesses={incorrectLetters.length}
       ></HangmanDrawing>
