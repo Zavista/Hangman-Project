@@ -1,6 +1,5 @@
 import { CSSProperties } from "react";
 
-// Define the CSS properties as constants
 const containerStyle: CSSProperties = {
   position: "relative",
 };
@@ -121,15 +120,16 @@ const LEFT_LEG = (
   />
 );
 
-const HangmanDrawing: React.FC = () => {
+type HangmanDrawingProps = {
+  numberOfGuesses: number;
+};
+
+const BODY_PARTS = [HEAD, BODY, RIGHT_ARM, LEFT_ARM, RIGHT_LEG, LEFT_LEG];
+
+const HangmanDrawing = ({ numberOfGuesses }: HangmanDrawingProps) => {
   return (
     <div style={containerStyle}>
-      {HEAD}
-      {BODY}
-      {RIGHT_ARM}
-      {LEFT_ARM}
-      {RIGHT_LEG}
-      {LEFT_LEG}
+      {BODY_PARTS.slice(0, numberOfGuesses)}
       <div style={verticalPoleStyle}></div>
       <div style={horizontalPoleStyle}></div>
       <div style={mainPoleStyle}></div>
