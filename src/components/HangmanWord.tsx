@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 const containerStyle: CSSProperties = {
   display: "flex",
   gap: ".25em",
