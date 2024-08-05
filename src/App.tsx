@@ -12,7 +12,6 @@ const containerStyle: React.CSSProperties = {
   justifyContent: "center",
   alignItems: "center",
   margin: "auto",
-  backgroundColor: "lightblue",
 };
 
 const textStyle: React.CSSProperties = {
